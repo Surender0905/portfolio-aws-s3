@@ -19,5 +19,5 @@ jobs:
                   aws-region: ap-south-1
             - name: Deploy
               run: |
-                  aws s3 sync . s3://portfolio-aws-s3
-                  aws s3 cp index.html s3://portfolio-aws-s3
+                  aws s3 sync . s3://demo-ci-cd-bucket-roshan
+                  aws s3 cp index.html demo-ci-cd-bucket-roshan
