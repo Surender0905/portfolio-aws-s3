@@ -18,6 +18,4 @@ jobs:
                   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY || 'default-secret-access-key' }}
                   aws-region: ap-south-1
             - name: Deploy
-              run: |
-                  aws s3 sync . s3://demo-ci-cd-bucket-roshan
-                  aws s3 cp index.html demo-ci-cd-bucket-roshan
+              run: aws s3 sync . demo-ci-cd-bucket-roshan --delete
