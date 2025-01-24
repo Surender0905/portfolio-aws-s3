@@ -1,1 +1,23 @@
 name: demo-ci-cd
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID || 'default-access-key-id' }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY || 'default-secret-access-key' }}
+                  aws-region: ap-south-1
+            - name: Deploy
+              run: |
+                  aws s3 sync . s3://portfolio-aws-s3
+                  aws s3 cp index.html s3://portfolio-aws-s3
